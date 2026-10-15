@@ -1,0 +1,72 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue.gd" id="1_dlg"]
+[ext_resource type="Texture2D" uid="uid://wpkb6118a1vc" path="res://assets/ui/panel_dialogue.png" id="2_pnl"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pnl"]
+texture = ExtResource("2_pnl")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 50.0
+texture_margin_bottom = 45.0
+
+[node name="Dialogue" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_dlg")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -210.0
+offset_right = -40.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_pnl")
+
+[node name="NameLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 430.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(1, 0.85, 0.35, 1)
+theme_override_font_sizes/font_size = 22
+text = "Profesor"
+
+[node name="DialogueLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 58.0
+offset_right = -30.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Texto del dialogo"
+autowrap_mode = 3
+
+[node name="ContinueButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -48.0
+offset_right = -60.0
+offset_bottom = -14.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+text = "Continuar (E)"
+flat = true

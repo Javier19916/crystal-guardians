@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b5p2ear570xmh" path="res://scenes/crystal.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://cfej7g505n4da" path="res://scenes/guard.tscn" id="6_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://cupcs0cyv5xk7" path="res://scenes/npc.tscn" id="7_tipki"]
+[ext_resource type="PackedScene" path="res://scenes/dialogue.tscn" id="8_dlg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbgi4"]
 texture = ExtResource("1_sugp2")
@@ -1184,6 +1185,8 @@ offset_top = 31.0
 offset_right = 145.0
 offset_bottom = 54.0
 text = "Cristales: 0/3"
+
+[node name="Dialogue" parent="." unique_id=874512390 instance=ExtResource("8_dlg")]
 
 [connection signal="collected" from="crystals/crystal" to="." method="_on_crystal_collected"]
 [connection signal="collected" from="crystals/crystal2" to="." method="_on_crystal_collected"]

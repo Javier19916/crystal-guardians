@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cupcs0cyv5xk7"]
 
 [ext_resource type="Texture2D" uid="uid://dn5s0tb1enjbp" path="res://assets/npc/npc.png" id="1_nh2m4"]
+[ext_resource type="Script" path="res://scripts/npc.gd" id="2_npcsc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_abqhh"]
 atlas = ExtResource("1_nh2m4")
@@ -44,6 +45,7 @@ height = 86.285706
 
 [node name="NPC" type="Node2D" unique_id=1070723878]
 scale = Vector2(0.7, 0.7)
+script = ExtResource("2_npcsc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1215978376]
 scale = Vector2(0.99999994, 0.99999994)
@@ -60,3 +62,14 @@ collision_layer = 0
 position = Vector2(-3.0000002, 4.0000005)
 scale = Vector2(1.0000001, 1.0000001)
 shape = SubResource("CapsuleShape2D_iupvx")
+
+[node name="InteractHint" type="Label" parent="." unique_id=1583920471]
+offset_left = -70.0
+offset_top = -80.0
+offset_right = 70.0
+offset_bottom = -54.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 18
+text = "Presiona E"
+horizontal_alignment = 1
