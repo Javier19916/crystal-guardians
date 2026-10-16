@@ -16,49 +16,47 @@ extends Node2D
 @onready var interact_hint: Label = $InteractHint
 
 # Aqui guardo si el jugador esta cerca o no
-var player_near: bool = false
+var player_nearby: bool = false
 
 func _ready() -> void:
 	# Escondo el letrero de "Presiona E" al inicio
 	interact_hint.hide()
-	# Me conecto al area para saber cuando entra y sale el jugador
-	interactive_area.body_entered.connect(_on_body_entered)
-	interactive_area.body_exited.connect(_on_body_exited)
+	# Las señales body_entered y body_exited del InteractiveArea
+	# ya las conecte desde el editor (pestaña Nodo > Señales),
+	# por eso no las vuelvo a conectar aqui con codigo.
 
 func _process(_delta: float) -> void:
 	# El letrero "Presiona E" solo sale si estoy cerca y el dialogo esta cerrado
-	var dialogue = get_tree().get_first_node_in_group("dialogue")
-	var dialogue_open: bool = dialogue != null and dialogue.is_open
-	interact_hint.visible = player_near and not dialogue_open
+	var dialogue_ui = get_tree().get_first_node_in_group("dialogue_ui")
+	var dialogue_open: bool = dialogue_ui != null and dialogue_ui.is_open
+	interact_hint.visible = player_nearby and not dialogue_open
 
-func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		player_near = true
+	# Si estoy cerca y presiono E, hablo con el profesor
+	if player_nearby and Input.is_action_just_pressed("interact"):
+		interact()
 
-func _on_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		player_near = false
-		# Si el jugador se aleja, cierro el dialogo
-		var dialogue = get_tree().get_first_node_in_group("dialogue")
-		if dialogue and dialogue.is_open:
-			dialogue.close_dialogue()
-
-func _unhandled_input(event: InputEvent) -> void:
-	# Si el jugador no esta cerca, la E no hace nada
-	if not player_near:
-		return
-	if not event.is_action_pressed("interact"):
+func interact() -> void:
+	var dialogue_ui = get_tree().get_first_node_in_group("dialogue_ui")
+	if dialogue_ui == null:
 		return
 
-	var dialogue = get_tree().get_first_node_in_group("dialogue")
-	if dialogue == null:
-		return
-
-	if dialogue.is_open:
+	if dialogue_ui.is_open:
 		# Si ya esta abierto, la E pasa a la siguiente linea
-		dialogue.next_dialogue()
+		dialogue_ui.next_dialogue()
 	else:
 		# Si esta cerrado, lo abro con el nombre y las lineas del profesor
-		dialogue.show_dialogue(npc_name, dialogues)
+		dialogue_ui.show_dialogue(npc_name, dialogues)
 
-	get_viewport().set_input_as_handled()
+# Se llama cuando algo ENTRA al area del profesor
+func _on_interactive_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		player_nearby = true
+
+# Se llama cuando algo SALE del area del profesor
+func _on_interactive_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		player_nearby = false
+		# Si el jugador se aleja, cierro el dialogo
+		var dialogue_ui = get_tree().get_first_node_in_group("dialogue_ui")
+		if dialogue_ui and dialogue_ui.is_open:
+			dialogue_ui.close_dialogue()

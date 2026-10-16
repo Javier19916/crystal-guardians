@@ -4,11 +4,10 @@ extends CanvasLayer
 # El panel empieza escondido y solo lo muestro cuando el profesor
 # (el NPC) me llama a show_dialogue().
 
-# Aqui guardo los nodos de la escena que voy a usar
-@onready var panel: Panel = $Panel
-@onready var name_label: Label = $Panel/NameLabel
-@onready var dialogue_label: Label = $Panel/DialogueLabel
-@onready var continue_button: Button = $Panel/ContinueButton
+@onready var panel: PanelContainer = $PanelContainer
+@onready var name_label: Label = $PanelContainer/VBoxContainer/NameLabel
+@onready var dialogue_label: Label = $PanelContainer/VBoxContainer/DialogueLabel
+@onready var continue_button: Button = $PanelContainer/VBoxContainer/ContinueButton
 
 # Aqui guardo las lineas que se van a decir y en cual voy
 var current_dialogues: Array[String] = []
@@ -17,7 +16,7 @@ var is_open: bool = false
 
 func _ready() -> void:
 	# Lo meto a un grupo para que el NPC lo pueda encontrar facil
-	add_to_group("dialogue")
+	add_to_group("dialogue_ui")
 	# Al iniciar el juego escondo el panel
 	panel.hide()
 	# Cuando le doy clic al boton paso a la siguiente linea
