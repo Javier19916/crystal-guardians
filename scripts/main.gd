@@ -11,12 +11,6 @@ func _ready() -> void:
 
 	total_crystals = crystals.size()
 
-	for crystal in crystals:
-		crystal.collected.connect(
-			_on_crystal_collected
-		)
-
-	update_crystal_label()
 
 func _on_crystal_collected() -> void:
 	crystals_collected += 1
