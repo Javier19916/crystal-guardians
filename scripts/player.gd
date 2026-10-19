@@ -15,7 +15,6 @@ var is_attacking: bool = false
 var attack_timer: float = 0.0
 
 @onready var attack_area: Area2D = $AttackArea
-@onready var healthBar: ProgressBar = $HealthBar
 @onready var animatedSprite: AnimatedSprite2D = $AnimatedSprite2D
 
 
@@ -24,9 +23,6 @@ func _ready() -> void:
 
 	health = max_health
 	health_changed.emit(health, max_health)
-
-	healthBar.max_value = max_health
-	healthBar.value = health
 
 	animatedSprite.animation_finished.connect(
 		_on_animation_finished
@@ -95,7 +91,6 @@ func take_damage(amount: int) -> void:
 	health = maxi(health - amount, 0)
 
 	health_changed.emit(health, max_health)
-	healthBar.value = health
 
 	if health == 0:
 		is_dead = true

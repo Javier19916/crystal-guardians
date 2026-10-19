@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cfej7g505n4da" path="res://scenes/guard.tscn" id="6_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://cupcs0cyv5xk7" path="res://scenes/npc.tscn" id="7_tipki"]
 [ext_resource type="PackedScene" uid="uid://uu2ogim4hy2v" path="res://scenes/dialogue_ui.tscn" id="9_85g3d"]
-[ext_resource type="Script" uid="uid://dlq2780ntywak" path="res://scripts/quest_hud.gd" id="9_choun"]
+[ext_resource type="PackedScene" uid="uid://fx5xbqglbdjm" path="res://scenes/game_hud.tscn" id="11_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://8b3u2cbckgnj" path="res://scenes/portal.tscn" id="11_ya4ey"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbgi4"]
@@ -1172,17 +1172,9 @@ position = Vector2(745, 152)
 [node name="guard3" parent="guards" unique_id=1459368938 instance=ExtResource("6_o6xl0")]
 position = Vector2(1012, 450)
 
-[node name="QuestHUD" type="CanvasLayer" parent="." unique_id=1673293086]
-script = ExtResource("9_choun")
-
-[node name="QuestLabel" type="Label" parent="QuestHUD" unique_id=688541430]
-offset_left = 45.0
-offset_top = 31.0
-offset_right = 145.0
-offset_bottom = 54.0
-text = "Misión: habla con Hans"
-
 [node name="DialogueUI" parent="." unique_id=591081461 instance=ExtResource("9_85g3d")]
 
 [node name="Portal" parent="." unique_id=1608960640 instance=ExtResource("11_ya4ey")]
 position = Vector2(1105, 141)
+
+[node name="GameHUD" parent="." unique_id=565920768 instance=ExtResource("11_eb6dy")]
