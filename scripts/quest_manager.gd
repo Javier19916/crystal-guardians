@@ -36,3 +36,9 @@ func complete_quest() -> void:
 	quest_state = QuestState.COMPLETED
 	quest_updated.emit()
 	quest_completed.emit()
+
+# Deja la mision como al inicio (se usa al reiniciar despues de morir)
+func reset_quest() -> void:
+	quest_state = QuestState.NOT_STARTED
+	collected_crystals = 0
+	quest_updated.emit()
