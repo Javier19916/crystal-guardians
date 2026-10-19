@@ -1,6 +1,44 @@
 [gd_scene format=3 uid="uid://fx5xbqglbdjm"]
 
 [ext_resource type="Script" uid="uid://cjloubc5mxxfu" path="res://scripts/game_hud.gd" id="1_jna2d"]
+[ext_resource type="Texture2D" uid="uid://bkurq4erhw524" path="res://assets/items/crystal.png" id="2_cry"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.22, 0.255, 0.353, 0.88)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.686, 0.733, 0.8, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 4
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_value"]
+font_size = 20
+font_color = Color(1, 1, 1, 1)
+outline_size = 5
+outline_color = Color(0.08, 0.09, 0.13, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font_size = 13
+font_color = Color(1, 0.84, 0.4, 1)
+outline_size = 4
+outline_color = Color(0.08, 0.09, 0.13, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_quest"]
+font_size = 18
+font_color = Color(1, 1, 1, 1)
+outline_size = 4
+outline_color = Color(0.08, 0.09, 0.13, 1)
 
 [node name="GameHUD" type="CanvasLayer" unique_id=565920768]
 script = ExtResource("1_jna2d")
@@ -14,55 +52,91 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="HealthPanel" type="PanelContainer" parent="HUDContainer" unique_id=613050239]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.86
-anchor_right = 0.86
-offset_left = 0.27996826
-offset_right = 107.27997
-offset_bottom = 54.0
+[node name="TopLeft" type="VBoxContainer" parent="HUDContainer" unique_id=1548223172]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 260.0
+offset_bottom = 140.0
+mouse_filter = 2
+theme_override_constants/separation = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUDContainer/HealthPanel" unique_id=1804505720]
+[node name="HealthPanel" type="PanelContainer" parent="HUDContainer/TopLeft" unique_id=613050239]
 layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="HealthLabel" type="Label" parent="HUDContainer/HealthPanel/VBoxContainer" unique_id=2099747916]
+[node name="HBox" type="HBoxContainer" parent="HUDContainer/TopLeft/HealthPanel" unique_id=1804505720]
 layout_mode = 2
-text = "VIDA: 100/100"
-horizontal_alignment = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="HeartsContainer" type="HBoxContainer" parent="HUDContainer/TopLeft/HealthPanel/HBox" unique_id=1804505721]
+texture_filter = 1
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="HealthLabel" type="Label" parent="HUDContainer/TopLeft/HealthPanel/HBox" unique_id=2099747916]
+layout_mode = 2
+text = "100/100"
+label_settings = SubResource("LabelSettings_value")
 vertical_alignment = 1
 
-[node name="HealthBar" type="ProgressBar" parent="HUDContainer/HealthPanel/VBoxContainer" unique_id=1651016263]
+[node name="CrystalsPanel" type="PanelContainer" parent="HUDContainer/TopLeft" unique_id=2141054094]
 layout_mode = 2
-value = 100.0
+size_flags_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="CrystalsPanel" type="PanelContainer" parent="HUDContainer" unique_id=2141054094]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.036000002
-anchor_right = 0.036000002
-offset_left = -0.47200394
-offset_top = 1.0
-offset_right = 124.528
-offset_bottom = 54.0
-
-[node name="CrystalLabel" type="Label" parent="HUDContainer/CrystalsPanel" unique_id=633748987]
+[node name="HBox" type="HBoxContainer" parent="HUDContainer/TopLeft/CrystalsPanel" unique_id=2141054095]
 layout_mode = 2
-text = "CRISTALES: 0/3"
-horizontal_alignment = 1
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="CrystalIcon" type="TextureRect" parent="HUDContainer/TopLeft/CrystalsPanel/HBox" unique_id=2141054096]
+custom_minimum_size = Vector2(18, 32)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_cry")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CrystalLabel" type="Label" parent="HUDContainer/TopLeft/CrystalsPanel/HBox" unique_id=633748987]
+layout_mode = 2
+text = "0/3"
+label_settings = SubResource("LabelSettings_value")
 vertical_alignment = 1
 
 [node name="QuestPanel" type="PanelContainer" parent="HUDContainer" unique_id=487448332]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.22200002
-anchor_right = 0.22200002
-offset_left = 0.25598145
-offset_right = 638.256
-offset_bottom = 60.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 16.0
+offset_right = 200.0
+offset_bottom = 72.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="QuestLabel" type="Label" parent="HUDContainer/QuestPanel" unique_id=1368643307]
+[node name="VBox" type="VBoxContainer" parent="HUDContainer/QuestPanel" unique_id=487448333]
 layout_mode = 2
-text = "Mision: Hablar con Han Solo"
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="QuestTitle" type="Label" parent="HUDContainer/QuestPanel/VBox" unique_id=487448334]
+layout_mode = 2
+text = "MISIÓN"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="QuestLabel" type="Label" parent="HUDContainer/QuestPanel/VBox" unique_id=1368643307]
+layout_mode = 2
+text = "Habla con Han Solo"
+label_settings = SubResource("LabelSettings_quest")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
