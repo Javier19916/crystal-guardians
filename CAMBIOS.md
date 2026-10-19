@@ -9,23 +9,31 @@
 - Panel de misión centrado arriba.
 - Archivos: `scenes/game_hud.tscn`, `scripts/game_hud.gd`.
 
-## 2. Joystick y botones (escena MobileControls)
-- Funciones completadas en `scripts/mobile_controls.gd`:
-  - `is_inside_joystick()`: detecta si el toque cayó sobre el joystick.
-  - `update_joystick()`: mueve la perilla sin salir del radio y calcula la dirección (con zona muerta).
-  - `reset_joystick()`: devuelve la perilla al centro al soltar.
-- El joystick presiona las acciones del Input Map (`move_left`, `move_right`, `move_up`, `move_down`)
-  con la fuerza del arrastre, así `player.gd` funciona igual con teclado o con pantalla táctil.
-- Botón de ataque, conectado a la acción `player_attack`.
-- Botón de interacción, conectado a la acción `interact` (abre el diálogo con el NPC).
-- Imágenes nuevas: `assets/ui/btn_attack*.png`, `assets/ui/btn_interact*.png`.
-- Joystick abajo a la izquierda y botones abajo a la derecha (posición para jugar con dos pulgares).
+## 2. Joystick flotante y botones (escena MobileControls)
+- El joystick ahora es **flotante**: aparece donde se pone el dedo dentro de la zona
+  izquierda inferior de la pantalla, y vuelve a su lugar al soltar.
+- Funciones en `scripts/mobile_controls.gd`:
+  - `is_inside_joystick()`: revisa si el toque cayó dentro de la zona táctil del joystick.
+  - `update_joystick()`: mueve la perilla sin salir del aro y calcula la dirección;
+    la zona muerta se reescala para que el movimiento arranque suave.
+  - `reset_joystick()`: regresa el aro y la perilla, y suelta las acciones de movimiento.
+- La dirección se reparte entre `move_left`, `move_right`, `move_up` y `move_down`
+  con la fuerza del arrastre, así `player.gd` funciona igual con teclado o pantalla táctil.
+- Señal `direction_changed` por si otra escena necesita saber hacia dónde se mueve.
+- Estilo dorado; el joystick se ve semitransparente cuando no se está usando.
+- Botones de hablar (`interact`) y atacar (`player_attack`) apilados a la derecha.
 
 ## 3. Conexión con el main
 - `MobileControls` agregado como instancia en `scenes/main.tscn`.
 - `scripts/main.gd`: se quitó la referencia a `UI/HUD/CrystalLabel`, que no existía y daba error al arrancar.
 - `scenes/dialogue_ui.tscn`: el panel de diálogo ahora va centrado abajo para no tapar los controles.
 - `project.godot`: activado `emulate_touch_from_mouse` para probar el joystick con el mouse en la PC.
+
+## 4. Reiniciar al morir
+- Al morir sale la pantalla "¡Has caído!" (`scenes/game_over.tscn`, `scripts/game_over.gd`)
+  y el juego se pausa.
+- Botón Reiniciar (o tecla E / Enter) recarga el nivel.
+- `QuestManager.reset_quest()` deja la misión como al inicio.
 
 ## Cómo probar en el celular (Android)
 1. En Godot: Editor > Manage Export Templates > descargar las plantillas.
