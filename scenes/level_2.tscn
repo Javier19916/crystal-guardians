@@ -11,6 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://uu2ogim4hy2v" path="res://scenes/dialogue_ui.tscn" id="9_bv48q"]
 [ext_resource type="PackedScene" uid="uid://8b3u2cbckgnj" path="res://scenes/portal.tscn" id="10_k22d5"]
 [ext_resource type="PackedScene" uid="uid://fx5xbqglbdjm" path="res://scenes/game_hud.tscn" id="11_k6a82"]
+[ext_resource type="PackedScene" uid="uid://mwwkp47bx5jv" path="res://scenes/mobile_controls.tscn" id="20_mobile"]
+[ext_resource type="PackedScene" path="res://scenes/game_over.tscn" id="21_gameover"]
+[ext_resource type="PackedScene" path="res://scenes/checkpoint.tscn" id="22_checkpoint"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbgi4"]
 texture = ExtResource("2_172wr")
@@ -1178,3 +1181,15 @@ position = Vector2(922, 219.00003)
 position = Vector2(920, 301)
 
 [node name="GameHUD" parent="." unique_id=565920768 instance=ExtResource("11_k6a82")]
+
+[node name="MobileControls" parent="." unique_id=142295060 instance=ExtResource("20_mobile")]
+
+[node name="GameOver" parent="." unique_id=1739204817 instance=ExtResource("21_gameover")]
+
+[node name="checkpoints" type="Node" parent="." unique_id=48211703]
+
+[node name="Checkpoint" parent="checkpoints" unique_id=48211603 instance=ExtResource("22_checkpoint")]
+position = Vector2(700, 250)
+
+[node name="Checkpoint2" parent="checkpoints" unique_id=48211604 instance=ExtResource("22_checkpoint")]
+position = Vector2(850, 450)

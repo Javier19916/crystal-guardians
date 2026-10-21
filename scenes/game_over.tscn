@@ -59,9 +59,16 @@ theme_override_font_sizes/font_size = 18
 text = "Los guardias te derrotaron."
 horizontal_alignment = 1
 
-[node name="RestartButton" type="Button" parent="Fondo/Caja/Contenido"]
-custom_minimum_size = Vector2(220, 56)
+[node name="LoadButton" type="Button" parent="Fondo/Caja/Contenido"]
+custom_minimum_size = Vector2(300, 56)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 22
-text = "Reiniciar (E)"
+text = "Volver al checkpoint (E)"
+
+[node name="RestartButton" type="Button" parent="Fondo/Caja/Contenido"]
+custom_minimum_size = Vector2(300, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 18
+text = "Reiniciar nivel (R)"
